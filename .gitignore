@@ -7,7 +7,6 @@ node_modules/
 proof.json
 public.json
 verification_key.json
-*.traineddata
-nameVerifier_js/
 
-package-lock.json
+nameVerifier_js/
+*.traineddata
