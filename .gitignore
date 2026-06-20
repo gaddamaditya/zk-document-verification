@@ -1,0 +1,13 @@
+node_modules/
+
+*.ptau
+*.zkey
+*.wtns
+
+proof.json
+public.json
+verification_key.json
+*.traineddata
+nameVerifier_js/
+
+package-lock.json
