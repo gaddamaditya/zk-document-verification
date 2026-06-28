@@ -2,32 +2,58 @@
 
 ## Overview
 
-This project implements a privacy-preserving document verification framework using OCR, Poseidon Hash, Circom, and Groth16 zk-SNARKs. It enables users to prove document attributes without revealing sensitive information.
+This project implements a privacy-preserving document verification framework using **Zero-Knowledge Proofs (zk-SNARKs)**. The system enables users to prove specific claims about a document (such as age, gender, or multiple attributes) without revealing the complete document or sensitive personal information.
 
-The framework is document-agnostic and can be extended to identity cards, passports, academic certificates, healthcare documents, and other structured documents.
+The framework supports multiple document formats and is designed to be modular, making it adaptable to identity cards, passports, academic certificates, healthcare records, and other structured documents.
+
+---
+
+## Features
+
+- Document processing for multiple file formats
+- OCR and text extraction
+- Automatic document type detection
+- Attribute extraction
+- Claim generation
+- Poseidon hash-based commitments
+- Multiple Circom verification circuits
+- Witness generation
+- Groth16 proof generation and verification
+- Privacy-preserving attribute verification
 
 ---
 
 ## System Architecture
 
 ```
-Document (Image/PDF)
-        ↓
-OCR / Text Extraction
-        ↓
-Attribute Extraction
-        ↓
-Poseidon Hash
-        ↓
-Circom Circuit
-        ↓
-Witness Generation
-        ↓
-Proof Generation
-        ↓
-Verification
-        ↓
-Valid Proof
+Document (PDF / Image / DOCX / TXT)
+                │
+                ▼
+      Document Extraction
+                │
+                ▼
+      Attribute Extraction
+                │
+                ▼
+        Claim Generation
+                │
+                ▼
+       Input Generation
+                │
+                ▼
+        Circom Circuit
+                │
+                ▼
+      Witness Generation
+                │
+                ▼
+      Proof Generation
+                │
+                ▼
+     Proof Verification
+                │
+                ▼
+         Verification Result
 ```
 
 ---
@@ -37,16 +63,33 @@ Valid Proof
 ```
 zk-document-verification
 │
-├── circuits
-│     └── documentVerifier.circom
+├── circuits/
+│   ├── AgeVerifier.circom
+│   ├── GenderVerifier.circom
+│   ├── ResultVerifier.circom
+│   ├── documentVerifier.circom
+│   └── multiAttributeVerifier.circom
 │
-├── Scripts
-│     ├── extract.js
-│     ├── preprocess.js
-│     ├── hash.js
-│     └── pdfExtract.js
+├── extractors/
+│   ├── docxExtractor.js
+│   ├── imageExtractor.js
+│   ├── pdfExtractor.js
+│   └── txtExtractor.js
 │
-├── input.json
+├── processors/
+│   ├── attributes/
+│   ├── claims/
+│   ├── circuitSelector/
+│   ├── inputGenerators/
+│   ├── attributeExtractor.js
+│   ├── documentType.js
+│   ├── hash.js
+│   ├── inputGenerator.js
+│   └── preprocess.js
+│
+├── samples/
+├── documents/
+├── main.js
 ├── package.json
 ├── README.md
 └── .gitignore
@@ -58,9 +101,10 @@ zk-document-verification
 
 - Circom
 - SnarkJS
-- Poseidon Hash
 - Groth16 zk-SNARKs
+- Poseidon Hash
 - Node.js
+- JavaScript
 - OCR
 - PDF Parsing
 
@@ -68,41 +112,42 @@ zk-document-verification
 
 ## Workflow
 
-1. Accept document input (Image or PDF).
-2. Extract attributes using OCR or text parsing.
-3. Convert extracted information into a suitable representation.
-4. Generate Poseidon hash commitments.
-5. Verify constraints using a Circom circuit.
-6. Generate witness and zk-SNARK proof.
-7. Verify the proof without revealing document contents.
+1. Upload a document.
+2. Detect the document type.
+3. Extract text using the appropriate extractor.
+4. Extract relevant attributes.
+5. Generate the verification claim.
+6. Create Circom inputs.
+7. Generate the witness.
+8. Produce a Zero-Knowledge Proof.
+9. Verify the proof without exposing sensitive information.
 
 ---
 
-## Applications
+## Supported Verification
 
-- Identity Verification
-- Privacy-Preserving KYC
-- Passport Verification
-- Academic Certificate Verification
-- Healthcare Credential Verification
-- Government Document Verification
+- Age Verification
+- Gender Verification
+- Multi-Attribute Verification
+- Generic Document Verification
 
 ---
 
-## Future Work
+## Future Enhancements
 
-- Multi-attribute verification
-- Age verification (Age ≥ 18)
-- Gender verification
-- Batch proof generation
-- QR code extraction
-- Digital signature verification
-- On-chain smart contract verification
+- Digital Signature Verification
+- QR Code Verification
+- Blockchain Smart Contract Verification
+- Batch Proof Generation
+- Selective Disclosure of Attributes
+- Support for Additional Document Types
 
 ---
 
 ## Author
 
-**Adithya Gaddam**  
-B.Tech Computer Science and Engineering  
+**Adithya Gaddam**
+
+B.Tech Computer Science and Engineering
+
 SRM University AP
