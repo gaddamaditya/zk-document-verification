@@ -1,12 +1,37 @@
+# Dependencies
 node_modules/
 
-*.ptau
-*.zkey
+# Circom generated folders
+*_js/
+
+# Circom generated files
+*.r1cs
+*.sym
+*.wasm
 *.wtns
 
-proof.json
-public.json
-verification_key.json
+# Trusted Setup files
+*.ptau
+*.zkey
 
-nameVerifier_js/
+# Generated proofs and public signals
+proof*.json
+public*.json
+verification_key*.json
+
+# Generated input files
+input.json
+inputs/*.json
+
+# OCR trained data
 *.traineddata
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# required files
+documents/
